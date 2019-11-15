@@ -15,4 +15,5 @@
     <string name="answer">カンカン</string>
     <string name="nextButton">次の問題へ</string>
     <string name="result_incorrect">不正解</string>
+    <string name="image">image</string>
 </resources>

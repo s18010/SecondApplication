@@ -26,6 +26,19 @@ class MainActivity : AppCompatActivity() {
         pref.edit { clear() }
     }
 
+    private fun initialize() {
+        randImage = (Math.random() * 3).toInt()
+
+        when (randImage) {
+            chihuahua -> mainImage.setImageResource(R.drawable.chihuahua)
+            koala -> mainImage.setImageResource(R.drawable.koala)
+            panda -> mainImage.setImageResource(R.drawable.panda)
+        }
+        chihuahuaButton.setOnClickListener { onButtonTapped(it) }
+        koalaButton.setOnClickListener { onButtonTapped(it) }
+        pandaButton.setOnClickListener { onButtonTapped(it) }
+    }
+
     private fun onButtonTapped(view: View?) {
         val selectedAnswer: Int? = when (view?.id) {
             R.id.chihuahuaButton -> chihuahua
@@ -49,7 +62,7 @@ class MainActivity : AppCompatActivity() {
         return getString(scoreText)
     }
 
-    private fun getScores() {
+    private fun getScoreData() {
         val pref = getSharedPreferences("SCORES", Context.MODE_PRIVATE)
         val lastScoreValue = pref.getInt("LAST_SCORE", -1)
         val lastScore2Value = pref.getInt("LAST_SCORE2", -1)
@@ -61,18 +74,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun load() {
-        randImage = (Math.random() * 3).toInt()
-
-        when (randImage) {
-            chihuahua -> mainImage.setImageResource(R.drawable.chihuahua)
-            koala -> mainImage.setImageResource(R.drawable.koala)
-            panda -> mainImage.setImageResource(R.drawable.panda)
-        }
-        chihuahuaButton.setOnClickListener { onButtonTapped(it) }
-        koalaButton.setOnClickListener { onButtonTapped(it) }
-        pandaButton.setOnClickListener { onButtonTapped(it) }
-
-        getScores()
+        initialize()
+        getScoreData()
     }
 
     override fun onResume() {

@@ -39,27 +39,40 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun load() {
-        randImage = (Math.random() * 3).toInt()
+    private fun getScoreResource(score: Int?): String {
+        val scoreText: Int = when (score) {
+            -1 -> R.string.na
+            0 -> R.string.incorrect
+            1 -> R.string.correct
+            else -> R.string.na
+        }
+        return getString(scoreText)
+    }
+
+    private fun getScores() {
         val pref = getSharedPreferences("SCORES", Context.MODE_PRIVATE)
         val lastScoreValue = pref.getInt("LAST_SCORE", -1)
         val lastScore2Value = pref.getInt("LAST_SCORE2", -1)
         val lastScore3Value = pref.getInt("LAST_SCORE3", -1)
 
+        lastScore.text = getScoreResource(lastScoreValue)
+        lastScore2.text = getScoreResource(lastScore2Value)
+        lastScore3.text = getScoreResource(lastScore3Value)
+    }
+
+    private fun load() {
+        randImage = (Math.random() * 3).toInt()
 
         when (randImage) {
             chihuahua -> mainImage.setImageResource(R.drawable.chihuahua)
             koala -> mainImage.setImageResource(R.drawable.koala)
             panda -> mainImage.setImageResource(R.drawable.panda)
         }
-
         chihuahuaButton.setOnClickListener { onButtonTapped(it) }
         koalaButton.setOnClickListener { onButtonTapped(it) }
         pandaButton.setOnClickListener { onButtonTapped(it) }
 
-        lastScore.text = lastScoreValue.toString()
-        lastScore2.text = lastScore2Value.toString()
-        lastScore3.text = lastScore3Value.toString()
+        getScores()
     }
 
     override fun onResume() {

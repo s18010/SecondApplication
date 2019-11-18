@@ -24,15 +24,15 @@ class ResultActivity : AppCompatActivity() {
         when (mainImage) {
             chihuahua -> {
                 resultImage.setImageResource(R.drawable.chihuahua)
-                answerText = "チワワ"
+                answerText = getString(R.string.chihuahuaText)
             }
             koala -> {
                 resultImage.setImageResource(R.drawable.koala)
-                answerText = "コアラ"
+                answerText = getString(R.string.koalaText)
             }
             panda -> {
                 resultImage.setImageResource(R.drawable.panda)
-                answerText = "パンダ"
+                answerText = getString(R.string.pandaText)
             }
         }
 
@@ -48,7 +48,8 @@ class ResultActivity : AppCompatActivity() {
         } else {
             saveScores(0)
             resultText.text = "不正解"
-            correctAnswerText.text = "正解は「${answerText}」でした"
+            val text = "正解は「${answerText}」でした"
+            correctAnswerText.text = text
         }
 
         backButton.setOnClickListener {

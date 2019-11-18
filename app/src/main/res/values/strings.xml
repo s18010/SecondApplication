@@ -7,9 +7,9 @@
     <string name="notAnswered">-----</string>
     <string name="titleText2">問題</string>
     <string name="questionText">写真の動物の名前は？</string>
-    <string name="option1">チワワ</string>
-    <string name="option2">コアラ</string>
-    <string name="option3">パンダ</string>
+    <string name="chihuahuaText">チワワ</string>
+    <string name="koalaText">コアラ</string>
+    <string name="pandaText">パンダ</string>
     <string name="ranranImage">ranranImage</string>
     <string name="result_correct">正解</string>
     <string name="answer">カンカン</string>

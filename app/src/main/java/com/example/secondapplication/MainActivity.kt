@@ -1,10 +1,12 @@
 package com.example.secondapplication
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.core.content.edit
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -19,10 +21,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         load()
-   }
 
-    fun onButtonTapped(view: View?) {
-        val selectedAnswer: Int? = when(view?.id) {
+        val pref = getSharedPreferences("SCORES", Context.MODE_PRIVATE)
+        pref.edit { clear() }
+    }
+
+    private fun onButtonTapped(view: View?) {
+        val selectedAnswer: Int? = when (view?.id) {
             R.id.chihuahuaButton -> chihuahua
             R.id.koalaButton -> koala
             R.id.pandaButton -> panda
@@ -36,16 +41,25 @@ class MainActivity : AppCompatActivity() {
 
     private fun load() {
         randImage = (Math.random() * 3).toInt()
+        val pref = getSharedPreferences("SCORES", Context.MODE_PRIVATE)
+        val lastScoreValue = pref.getInt("LAST_SCORE", -1)
+        val lastScore2Value = pref.getInt("LAST_SCORE2", -1)
+        val lastScore3Value = pref.getInt("LAST_SCORE3", -1)
 
-        when(randImage) {
+
+        when (randImage) {
             chihuahua -> mainImage.setImageResource(R.drawable.chihuahua)
             koala -> mainImage.setImageResource(R.drawable.koala)
             panda -> mainImage.setImageResource(R.drawable.panda)
         }
 
-        chihuahuaButton.setOnClickListener{ onButtonTapped(it) }
-        koalaButton.setOnClickListener{ onButtonTapped(it) }
-        pandaButton.setOnClickListener{ onButtonTapped(it) }
+        chihuahuaButton.setOnClickListener { onButtonTapped(it) }
+        koalaButton.setOnClickListener { onButtonTapped(it) }
+        pandaButton.setOnClickListener { onButtonTapped(it) }
+
+        lastScore.text = lastScoreValue.toString()
+        lastScore2.text = lastScore2Value.toString()
+        lastScore3.text = lastScore3Value.toString()
     }
 
     override fun onResume() {
